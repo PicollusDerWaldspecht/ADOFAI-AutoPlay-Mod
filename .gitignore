@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# Local decompiled game reference (not committed)
+game-dump/
+
+# NuGet
+*.nupkg
+packages/
