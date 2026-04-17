@@ -7,7 +7,7 @@ Ice* with a hotkey. Works in every level.
 
 > The green "Automatisches Spielen" / "autoplay" label in the top-left is
 > left visible here on purpose, so you can see that autoplay is actually
-> the mod doing the work. In normal use it stays hidden — toggle it via
+> the mod doing the work. In normal use it stays hidden toggle it via
 > the `HideAutoplayText` config option.
 
 
