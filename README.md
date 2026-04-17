@@ -8,7 +8,7 @@ Ice* with a hotkey. Works in every level.
 1. Install [BepInEx 5.x (x64)](https://github.com/BepInEx/BepInEx/releases)
    into your ADOFAI folder and run the game once so it creates its
    folder structure.
-2. Get the mod DLL — either option works:
+2. Get the mod DLL either option works:
    - **Download:** grab `AdoFai-AutoPlay-Mod.dll` from the
      [Releases page](../../releases).
    - **Build yourself:** see [Building](#building) below. The build should
@@ -30,14 +30,14 @@ On first launch you'll find `BepInEx/config/adofai.autoplay.cfg`:
 | `ToggleKey`        | `F8`    | Key that toggles autoplay. Any Unity `KeyCode` name works.             |
 | `EnabledAtStart`   | `false` | Used **only when `RememberState` is `false`**. `false` = always start with autoplay OFF, `true` = always start ON. |
 | `RememberState`    | `false` | `true` = on startup, resume whatever state autoplay was in when you last quit. Overrides `EnabledAtStart`. |
-| `Enabled`          | `false` | Storage slot for `RememberState` — the mod writes your current state here every time you toggle. Only read on startup when `RememberState = true`. You don't need to edit this by hand. |
+| `Enabled`          | `false` | Storage slot for `RememberState`, the mod writes your current state here every time you toggle. Only read on startup when `RememberState = true`. You don't need to edit this by hand! |
 | `HideAutoplayText` | `true`  | Hides the green "autoplay" label in the top-left while active.         |
 
 ## Building
 
 ### Requirements
 
-- **.NET SDK 6.0 or newer** — [download here](https://dotnet.microsoft.com/download).
+- **.NET SDK 6.0 or newer** ([download here](https://dotnet.microsoft.com/download))
 - **ADOFAI installed locally.** The build references DLLs from the
   game's `Managed/` folder, so the game has to be on the same machine.
   The default Steam path is used automatically, override it with the
