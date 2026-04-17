@@ -12,9 +12,9 @@ namespace AdoFai_AutoPlay_Mod
     {
         public const string PluginGuid = "adofai.autoplay";
         public const string PluginName = "ADOFAI AutoPlay";
-        public const string PluginVersion = "0.3.0";
+        public const string PluginVersion = "0.4.0";
 
-        internal static ConfigEntry<KeyCode> ToggleKeyConfig = null!;
+        internal static ConfigEntry<KeyboardShortcut> ToggleKeyConfig = null!;
         internal static ConfigEntry<bool> EnabledAtStartConfig = null!;
         internal static ConfigEntry<bool> RememberStateConfig = null!;
         internal static ConfigEntry<bool> PersistedEnabledConfig = null!;
@@ -39,6 +39,9 @@ namespace AdoFai_AutoPlay_Mod
             Logger.LogInfo(
                 $"{PluginName} v{PluginVersion} loaded. " +
                 $"Toggle with [{ToggleKeyConfig.Value}]. Initial state: {(AutoPlayState.Enabled ? "ON" : "OFF")}.");
+            Logger.LogDebug(
+                $"Parsed ToggleKey → main={ToggleKeyConfig.Value.MainKey}, " +
+                $"modifiers=[{string.Join("+", ToggleKeyConfig.Value.Modifiers)}]");
         }
 
         private void OnDestroy()
@@ -51,17 +54,18 @@ namespace AdoFai_AutoPlay_Mod
             ToggleKeyConfig = Config.Bind(
                 "General",
                 "ToggleKey",
-                KeyCode.F8,
-                "Key that toggles AutoPlay on/off. See https://docs.unity3d.com/ScriptReference/KeyCode.html for valid names.");
+                new KeyboardShortcut(KeyCode.F8),
+                "Key (or key combination) that toggles AutoPlay on/off.\n" +
+                "Single key example:     ToggleKey = Tab\n" +
+                "Combination example:    ToggleKey = Tab + LeftControl\n" +
+                "Valid key names are Unity KeyCodes: https://docs.unity3d.com/ScriptReference/KeyCode.html");
 
             EnabledAtStartConfig = Config.Bind(
                 "General",
                 "EnabledAtStart",
                 false,
-                "Startup behaviour when RememberState is false.\n" +
-                "  false = AutoPlay starts OFF every time you launch the game.\n" +
-                "  true  = AutoPlay starts ON every time you launch the game.\n" +
-                "Ignored when RememberState is true.");
+                "If true, AutoPlay is already active the moment the game starts. " +
+                "Ignored when RememberState is true (the last saved state wins instead).");
 
             RememberStateConfig = Config.Bind(
                 "General",
@@ -78,7 +82,7 @@ namespace AdoFai_AutoPlay_Mod
                 "Storage slot for RememberState. The mod overwrites this automatically every time\n" +
                 "you press the toggle key, so it reflects AutoPlay's state at your last quit.\n" +
                 "Only read on startup when RememberState is true — otherwise this value is ignored.\n" +
-                "You normally don't need to edit this by hand.");
+                "You don't need to edit this by hand.");
 
             HideAutoplayTextConfig = Config.Bind(
                 "UI",

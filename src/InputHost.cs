@@ -41,7 +41,7 @@ namespace AdoFai_AutoPlay_Mod
                 RDC.auto = false;
             }
 
-            if (Input.GetKeyDown(Plugin.ToggleKeyConfig.Value))
+            if (Plugin.ToggleKeyConfig.Value.IsDown())
             {
                 AutoPlayState.Enabled = !AutoPlayState.Enabled;
 
